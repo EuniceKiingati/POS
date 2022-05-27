@@ -14,25 +14,33 @@ except Exception as e:
 
 class Product():
 
-    def __init__(self, data):
-        self.data = data
+     def __init__(self, product_id=None, name=None, size=None, price=None):
+        self.product_id=product_id
+        self.name=name
+        self.size=size
+        self.price=price
 
-    def save_product(self):
-
-        new_product = {}
-        new_product['product_id'] = str(uuid4())
-        new_product["name"] = self.data['name']
-        new_product["size"] = self.data['size']
-        new_product["price"] = self.data['price']
-
-        products.append(new_product)
-
-        with open('products.json', 'w') as pfile_out:
-            json.dump(products, pfile_out, indent=0)
+     def __str__(self):
+        return ( f'{self.product_id} {self.name} {self.size} {self.price}')
+    
 
 def get_all_products():
     #breakpoint()
     print(products)
+
+def save_product(data):
+        new_product = {}
+        new_product['product_id'] = str(uuid4())
+        new_product["name"] = data['name']
+        new_product["size"] = data['size']
+        new_product["price"] =data['price']
+        product=Product(new_product['product_id'], new_product['name'],new_product['size'],new_product['price'])
+
+        get_all_products()
+        products.append(new_product)
+
+        with open('products.json', 'w') as pfile_out:
+            json.dump(products, pfile_out, indent=0)
     
         
         
@@ -61,8 +69,7 @@ def add_product():
             "price":price
             
         }
-        addedproduct= Product(data)
-        addedproduct.save_product()
+        save_product(data)
         print(products)
         choice=int(input("enter 1 to add another product or 2 to exit: "))
         if choice==2:
@@ -160,4 +167,4 @@ def product_menu():
         
 
 
-    print("working on it")
+    #print("working on it")
