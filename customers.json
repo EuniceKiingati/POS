@@ -1,26 +1,26 @@
 [
 {
-"user_id": "153145f3-4bee-4699-8c8b-a7072922dcbb",
-"name": "Ian",
-"phonenumber": 7933933,
-"address": "255"
+"user_id": 7750,
+"name": "Kiingati",
+"phonenumber": 722334455,
+"address": "nairobi"
 },
 {
-"user_id": "acbd7469-55c1-4234-ae07-e3c94958401f",
-"name": "Hezzo",
-"phonenumber": 7944944,
-"address": "256"
-},
-{
-"user_id": "6b264a3d-705e-4ee8-b941-7c5f9249e47b",
+"user_id": 5233,
 "name": "Yunis",
-"phonenumber": 7911922,
-"address": "254"
+"phonenumber": 733445566,
+"address": "Kiambu"
 },
 {
-"user_id": "811fab13-8b1a-4e73-b38c-e7a79589d3c6",
+"user_id": 4138,
+"name": "ken",
+"phonenumber": 733444555,
+"address": "nanyuki"
+},
+{
+"user_id": 9368,
 "name": "Hamilton",
-"phonenumber": 7334455,
-"address": "255"
+"phonenumber": 7456754,
+"address": "qatar"
 }
 ]

@@ -1,0 +1,26 @@
+[
+  {
+    "product_id": 22029,
+    "name": "Rice",
+    "quantity": 4,
+    "price": 110
+  },
+  {
+    "product_id": 46579,
+    "name": "Flour",
+    "quantity": 41,
+    "price": 120
+  },
+  {
+    "product_id": 39948,
+    "name": "Salt",
+    "quantity": 38,
+    "price": 100
+  },
+  {
+    "product_id": 43751,
+    "name": "mangoes",
+    "quantity": 46,
+    "price": 20
+  }
+]

@@ -1,0 +1,139 @@
+[
+  {
+    "purchase_id": "80c120b6-f44a-4831-9b69-7843b32cdb2e",
+    "date": "05-06-2022 18:02:32",
+    "total": 660,
+    "user_id": 7750,
+    "products": [
+      {
+        "product_id": 22029,
+        "quantity": 6,
+        "amount": 660
+      }
+    ]
+  },
+  {
+    "purchase_id": "ffd455e9-a786-4aee-9608-415ffd939922",
+    "date": "05-06-2022 18:03:10",
+    "total": 440,
+    "user_id": 5233,
+    "products": [
+      {
+        "product_id": 46579,
+        "quantity": 2,
+        "amount": 240
+      },
+      {
+        "product_id": 39948,
+        "quantity": 2,
+        "amount": 200
+      }
+    ]
+  },
+  {
+    "purchase_id": "49fae43a-a52b-4dcb-90f8-2bd4cdc24c30",
+    "date": "05-06-2022 19:34:24",
+    "total": 100,
+    "user_id": 4138,
+    "products": [
+      {
+        "product_id": 43751,
+        "quantity": 5,
+        "amount": 100
+      }
+    ]
+  },
+  {
+    "purchase_id": "2c0937fd-474d-445c-a5e4-ccf2eda0eeb1",
+    "date": "06-06-2022 08:46:23",
+    "total": 460,
+    "user_id": 7750,
+    "products": [
+      {
+        "product_id": 22029,
+        "quantity": 2,
+        "amount": 220
+      },
+      {
+        "product_id": 46579,
+        "quantity": 2,
+        "amount": 240
+      }
+    ]
+  },
+  {
+    "purchase_id": "2d1806a1-6055-4176-bc6c-a749c2474eba",
+    "date": "06-06-2022 08:56:16",
+    "total": 220,
+    "user_id": 7750,
+    "products": [
+      {
+        "product_id": 22029,
+        "quantity": 2,
+        "amount": 220
+      }
+    ]
+  },
+  {
+    "purchase_id": "0a638473-15ab-4312-9577-8ef5a016d262",
+    "date": "06-06-2022 09:29:13",
+    "total": 810,
+    "user_id": 7750,
+    "products": [
+      {
+        "product_id": 22029,
+        "quantity": 3,
+        "amount": 330
+      },
+      {
+        "product_id": 46579,
+        "quantity": 4,
+        "amount": 480
+      }
+    ]
+  },
+  {
+    "purchase_id": "f6618fb8-53cb-44a2-8afd-b98c4e9e718e",
+    "date": "07-06-2022 10:44:23",
+    "total": 80,
+    "user_id": 4138,
+    "products": [
+      {
+        "product_id": 43751,
+        "quantity": 4,
+        "amount": 80
+      }
+    ]
+  },
+  {
+    "purchase_id": "de5fc38f-8de6-4299-973c-5b1b46c687a3",
+    "date": "07-06-2022 10:48:43",
+    "total": 560,
+    "user_id": 4138,
+    "products": [
+      {
+        "product_id": 43751,
+        "quantity": 3,
+        "amount": 60
+      },
+      {
+        "product_id": 39948,
+        "quantity": 5,
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "purchase_id": "8eecbaf7-90b7-41a8-890f-9385c4eef604",
+    "date": "07-06-2022 12:36:42",
+    "total": 40,
+    "user_id": 5233,
+    "products": [
+      {
+        "product_id": 43751,
+        "quantity": 2,
+        "amount": 40
+      }
+    ]
+  }
+]

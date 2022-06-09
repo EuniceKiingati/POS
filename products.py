@@ -3,6 +3,7 @@
 import pdb
 import json
 import random
+import pprint
 
 try:
     product_data = open('products.json')
@@ -25,8 +26,19 @@ class Product():
 
 
 def get_all_products():
-    print(products)
+    pprint.pprint(products)
     return products
+
+def get_single_product(product_id):
+    product = {}
+    for prod in products:
+        if prod['product_id'] == product_id:
+            product= prod
+            break
+
+    if not product:
+        print(f"No customer with id: {product_id}")
+    return product
 
 
 def save_product(data):
@@ -68,6 +80,13 @@ def add_product():
             continue_add = False
             print("Product (s) added")
 
+def search_product():
+    prodid = input("enter product-id: ")
+    for prod in products:
+        # breakpoint()
+
+        if prod['product_id'] == prodid:
+            print(prod)
 
 def edit_product(data):
 
@@ -94,7 +113,7 @@ def update_product():
 
 def delete_product():
     get_all_products()
-    prodid = input("enter customer id: ")
+    prodid = input("enter product id: ")
 
     for i in range(len(products)):
         if products[i]['product_id'] == prodid:
@@ -111,6 +130,7 @@ def product_menu():
     print("1:add product")
     print("2:update product")
     print("3:Delete product")
+    print("4:List all customers")
 
     selection = int(input("enter your choice: "))
     if selection == 1:
@@ -119,15 +139,10 @@ def product_menu():
         update_product()
     elif selection == 3:
         delete_product()
+    elif selection==4:
+        get_all_products()
+    elif selection==5:
+        search_product()
 
-        # print(cust)
+        
 
-
-# import pdb;
-# pdb.set_trace()
-
-
-# with open('customers.json', 'w') as file_out:
-    #json.dump(customers, file_out, indent=2)
-
-    #print("working on it")

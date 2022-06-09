@@ -3,6 +3,8 @@
 import pdb
 import json
 import random
+import pprint
+
 
 try:
     customer_data = open('customers.json')
@@ -25,8 +27,23 @@ class Customer():
 
 
 def get_all_customers():
-    print(customers)
+    pprint.pprint(customers)
+    print(f"Total number of customers is: {(len(customers))}")
     return customers
+
+
+def get_single_customer(user_id):
+    customer = {}
+    for cust in customers:
+        if cust['user_id'] == user_id:
+            customer = cust
+            break
+
+    if not customer:
+        print(f"No customer with id: {user_id}")
+    return customer
+
+
 
 
 def save_customer(data):
@@ -91,9 +108,9 @@ def update_customer():
 
 def delete_customer():
     get_all_customers()
-    continue_delete=True
+    continue_delete = True
     while continue_delete:
-    # get_all_customers()
+        # get_all_customers()
         yourid = input("enter customer id: ")
 
         for i in range(len(customers)):
@@ -103,8 +120,9 @@ def delete_customer():
     # breakpoint()
         with open('customers.json', 'w') as file_out:
             json.dump(customers, file_out, indent=2)
-            #print("Customer deleted successfully")
-        choice = int(input("enter 1 to delete another customer or 2 to exit: "))
+            print("Customer deleted successfully")
+        choice = int(
+            input("enter 1 to delete another customer or 2 to exit: "))
         if choice == 2:
             continue_delete = False
             print("Customer (s) deleted")
@@ -115,6 +133,10 @@ def customer_menu():
     print("1:add customer")
     print("2:update customer")
     print("3:Delete customer")
+    print("4:List all customers")
+   
+
+   
 
     selection = int(input("enter your choice: "))
     if selection == 1:
@@ -123,9 +145,9 @@ def customer_menu():
         update_customer()
     elif selection == 3:
         delete_customer()
+    elif selection == 4:
+        get_all_customers()
+    
+    
 
-        # print(cust)
-
-
-# import pdb;
-# pdb.set_trace()
+    
