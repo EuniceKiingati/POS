@@ -5,18 +5,32 @@ The system manages all relevant customer and product data and all purchases done
 
 ## Functionalities
 The system main menu prompts the user to choose any of the following:
-    1. Customer operations
-    2. Product operations
-    1. Purchase operations
+1. Customer operations
+2. Product operations
+3. Purchase operations
 
 ### 1.Customer Operations
-These include adding a new customer, updating customer data, deleting a customer, and getting all customers.
+The [customer.py](https://github.com/EuniceKiingati/POS/blob/main/customers.py) file offers a menu that allows the user to select the following operations:
+- add customer by following instructions in prompt
+- update customer details
+- delete a customer
+- search for customer
+- list all and number of customers in file
+
 
 ### 2.Product Operations
-These include adding a new product, updating product data, deleting a product, and getting all customers.
+The [product.py](https://github.com/EuniceKiingati/POS/blob/main/products.py) file offers a menu that allows the user to select the following operations:
+- add product by following instructions in prompt
+- update productomer details
+- delete a product
+- search for product
+- list all and number of products in file
 
 ### 3.Purchase Operations
-These include making a purchase, getting a single purchase(by date), getting all purchases, and getting customer info in relation to purchases.
+The [purchases.py](https://github.com/EuniceKiingati/POS/blob/main/purchases.py) file offers a menu that allows the user to select the following operations:
+- make a purchase
+- list all purchases
+- get specific purchase
 
 ### How can this be manually tested?
 1.Install git
