@@ -3,7 +3,7 @@
 import pdb
 import json
 import random
-import pprint
+from pprint import pprint
 
 
 try:
@@ -26,10 +26,12 @@ class Customer():
         return (f'{self.user_id} {self.name} {self.phonenumber} {self.address}')
 
 
+# reusable function to retrieve all customers
 def get_all_customers():
-    pprint.pprint(customers)
-    print(f"Total number of customers is: {(len(customers))}")
+
     return customers
+
+# reusable function to get single customer by Id
 
 
 def get_single_customer(user_id):
@@ -43,10 +45,9 @@ def get_single_customer(user_id):
         print(f"No customer with id: {user_id}")
     return customer
 
+# save customer function called after inputing customer details
 
-
-
-def save_customer(data):
+def save_customer_to_file(data):
 
     new_customer = {}
     new_customer['user_id'] = random.randint(1000, 10000)
@@ -63,6 +64,7 @@ def save_customer(data):
     with open('customers.json', 'w') as file_out:
         json.dump(customers, file_out, indent=0)
 
+# adding a customer to db
 
 def add_customer():
 
@@ -78,12 +80,13 @@ def add_customer():
             "address": address
 
         }
-        save_customer(data)
+        save_customer_to_file(data)
         choice = int(input("enter 1 to add another customer or 2 to exit: "))
         if choice == 2:
             continue_add = False
             print("Customer (s) added")
 
+# updating customer details
 
 def update_customer():
     get_all_customers()
@@ -105,6 +108,7 @@ def update_customer():
         json.dump(customers, file_out, indent=0)
         print("Customer updated successfully")
 
+# deleting a customer
 
 def delete_customer():
     get_all_customers()
@@ -117,7 +121,7 @@ def delete_customer():
             if customers[i]['user_id'] == yourid:
                 customers.remove(customers[i])
             break
-    # breakpoint()
+    
         with open('customers.json', 'w') as file_out:
             json.dump(customers, file_out, indent=2)
             print("Customer deleted successfully")
@@ -128,26 +132,81 @@ def delete_customer():
             print("Customer (s) deleted")
 
 
+# viewing customers in db and the total number of customers
+def customers_in_db():
+    pprint(get_all_customers())
+    print(f"Total number of customers is: {(len(customers))}")
+
+
+#function to get customer info(name, products bought and amount spent)
+def get_customer_info():
+    from purchases import get_purchases_by_cust_id
+    from products import get_single_product
+
+    cust_id=int(input("Enter customer id to view details: "))
+
+    customer = get_single_customer(user_id=cust_id)
+    if not customer:
+        return
+    customer_purchases = get_purchases_by_cust_id(cust_id)
+    if not customer_purchases:
+        return
+    total_spent = 0
+    products_bought = {}
+
+    for purchase in customer_purchases:
+        total_spent += purchase['total']
+
+        for product in purchase['products']:
+            product_info = get_single_product(product['product_id'])
+            quantity = products_bought.get(product_info['name'], 0)
+            quantity += product['quantity']
+            products_bought.update({product_info['name']: quantity})
+    print(f"Customer: {customer['name']}\n")
+    print(f"Total spent: {total_spent}\n")
+    print(f"Products bought\n")
+    print(f"Name ----- Quantity\n")
+    for key, value in products_bought.items():
+        print(f"{key}     {value}")
+        
+
+# the submenu to navigate customer operations
+
 def customer_menu():
+    print("---------------------------")
     print("what would you like to do?")
     print("1:add customer")
     print("2:update customer")
     print("3:Delete customer")
     print("4:List all customers")
-   
-
-   
-
-    selection = int(input("enter your choice: "))
-    if selection == 1:
-        add_customer()
-    elif selection == 2:
-        update_customer()
-    elif selection == 3:
-        delete_customer()
-    elif selection == 4:
-        get_all_customers()
-    
-    
+    print("5:Get customer information")
 
     
+    try:
+
+        selection = int(input("enter your choice: "))
+        if selection == 1:
+            add_customer()
+            customer_menu()
+        elif selection == 2:
+            update_customer()
+            customer_menu()
+        elif selection == 3:
+            delete_customer()
+            customer_menu()
+        elif selection == 4:
+            customers_in_db()
+            customer_menu()
+        elif selection == 5:
+            get_customer_info()
+            customer_menu()
+        elif selection == 6:
+            from main import menu
+            menu()
+
+        else:
+            print("\n\tInvalid selection! Please try again.\t\t")
+    except:
+        print("\n\tInvalid input! Please enter a valid value.\t\t")
+
+
