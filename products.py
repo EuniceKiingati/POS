@@ -3,7 +3,7 @@
 import pdb
 import json
 import random
-import pprint
+from pprint import pprint
 
 try:
     product_data = open('products.json')
@@ -24,24 +24,23 @@ class Product():
     def __str__(self):
         return (f'{self.product_id} {self.name} {self.quantity} {self.price}')
 
-
+#reusable function  to get all products
 def get_all_products():
-    pprint.pprint(products)
     return products
 
+#reusable function to get single product
 def get_single_product(product_id):
     product = {}
     for prod in products:
         if prod['product_id'] == product_id:
-            product= prod
-            break
+            product = prod
 
     if not product:
-        print(f"No customer with id: {product_id}")
+        print(f"No product with id: {product_id}")
     return product
 
-
-def save_product(data):
+#function to save product data to file
+def save_product_to_file(data):
     new_product = {}
     new_product['product_id'] = random.randint(20000, 90000)
     new_product["name"] = data['name']
@@ -56,9 +55,9 @@ def save_product(data):
     with open('products.json', 'w') as pfile_out:
         json.dump(products, pfile_out, indent=2)
 
-    #print("so far so good")
+    # print("so far so good")
 
-
+#function to add product details
 def add_product():
 
     continue_add = True
@@ -73,33 +72,31 @@ def add_product():
             "price": price
 
         }
-        save_product(data)
+        save_product_to_file(data)
         print(products)
         choice = int(input("enter 1 to add another product or 2 to exit: "))
         if choice == 2:
             continue_add = False
             print("Product (s) added")
 
+#function to view product by id
 def search_product():
-    prodid = input("enter product-id: ")
-    for prod in products:
-        # breakpoint()
+    prodid = input("enter product-id to view product: ")
+    print(get_single_product(product_id=prodid))
 
-        if prod['product_id'] == prodid:
-            print(prod)
-
+#edits data in file
 def edit_product(data):
 
     with open('products.json', 'w') as pfile_out:
         json.dump(data, pfile_out, indent=2)
         print("Product updated successfully")
 
-
+# function to update product details
 def update_product():
-    get_all_products()  # calling this function to be able to see the id's
+    pprint(get_all_products())  # calling this function to be able to see the id's
     prodid = input("enter product-id: ")
     for prod in products:
-        # breakpoint()
+        
 
         if prod['product_id'] == prodid:
 
@@ -110,7 +107,7 @@ def update_product():
 
     edit_product(products)
 
-
+#function to delete product
 def delete_product():
     get_all_products()
     prodid = input("enter product id: ")
@@ -124,25 +121,43 @@ def delete_product():
         json.dump(products, pfile_out, indent=2)
         print("Product deleted successfully")
 
+#function to view products and number of products in db
+def products_in_db():
+    pprint(get_all_products())
+    print(f"Total number of products is: {(len(products))}")
 
+#product submenu
 def product_menu():
-    print("what would you like to do?")
-    print("1:add product")
-    print("2:update product")
-    print("3:Delete product")
-    print("4:List all customers")
+    print("***What would you like to do?***")
+    print("\t1:add product")
+    print("\t2:update product")
+    print("\t3:Delete product")
+    print("\t4:List all products")
+    print("\t5:Search for product")
+    print("\t6:Back to main menu")
 
-    selection = int(input("enter your choice: "))
-    if selection == 1:
-        add_product()
-    elif selection == 2:
-        update_product()
-    elif selection == 3:
-        delete_product()
-    elif selection==4:
-        get_all_products()
-    elif selection==5:
-        search_product()
+    try:
+        selection = int(input("enter your choice: "))
+        if selection == 1:
+            add_product()
+            product_menu()
+        elif selection == 2:
+            update_product()
+            product_menu()
+        elif selection == 3:
+            delete_product()
+            product_menu()
+        elif selection == 4:
+            products_in_db()
+            product_menu()
+        elif selection == 5:
+            search_product()
+            product_menu()
+        elif selection==6:
+            from main import menu
+            menu()
+        else:
+            print("\n\tInvalid selection! Please try again.\t\t")
 
-        
-
+    except:
+        print("\n\tInvalid input! Please enter a valid value.\t\t")
