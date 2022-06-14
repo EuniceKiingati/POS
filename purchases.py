@@ -5,6 +5,7 @@ import json
 import pdb
 from uuid import uuid4
 import datetime
+from pprint import pprint
 
 
 try:
@@ -13,7 +14,6 @@ try:
 except Exception as e:
     print(e)
     purchases = []
-
 
 
 def validate_product_quantity(products, product_id, quantity):
@@ -48,20 +48,24 @@ def checkout(purchase):
                 make_purchase()
         else:
             balance = cashgiven-purchase["total"]
-            #breakpoint()
-            print(" here's your Receipt:")
-            print("***********")
-            print(f"Customer ID: {purchase['user_id']}\n")
-            print("********* Products purchased***********\n")
-            for product in purchase['products']:
-                print(f"Product ID: {product['product_id']} {product['quantity']} {product['amount']}]")
-            #print("products bought"+purchase.products)
-            print(f"total is {purchase['total']}\n")
-            print(f"Cash given is {cashgiven}\n")
-            print(f"Balance is {balance}\n")
-            print("Purchase complete")
-            print("Thank you for shopping with us!")
 
+           
+
+        
+            # breakpoint()
+            print("\t****Here's your Receipt***")
+            print("\t***********")
+            print(f"\tCustomer ID: {purchase['user_id']}")
+            print("\t--Products purchased are-- ")
+            for product in purchase['products']:
+                print(
+                    f"\t\tProduct ID: {product['product_id']} {product['quantity']} {product['amount']}]")
+            
+            print(f"\tTotal is {purchase['total']}")
+            print(f"\tCash given is {cashgiven}")
+            print(f"\tBalance is {balance}")
+            print("\t***Purchase complete***")
+            print("\t***Thank you for shopping with us!***\n")
 
 
 def make_purchase():
@@ -115,51 +119,81 @@ def make_purchase():
             if choice == 2:
                 purchases.append(purchase)
                 print("Total is:" + str(purchase["total"]))
-                # checkout()
+               
 
                 with open('purchases.json', 'w') as pfile_out:
                     json.dump(purchases, pfile_out, indent=2)
-                    # save_purchase(purchase)
+                   
                 continue_add = False
                 print("Purchase(s) added")
-                # purchase_menu()
+                
 
         checkout(purchase)
 
-#checkout(purchases[0])
 
+#function to get all purchases
 def get_all_purchases():
     print(purchases)
     return purchases
 
-
-
-def get_customer_info():  # need to add ability to see name, annd product names..make UI better
-
-    customer_id=int(input("Enter customer id to view customer: "))
-    get_single_customer(user_id=customer_id)
-   
+#reusable function to get purchase by customer id
+def get_purchases_by_cust_id(user_id):
+    purchaselist = []
     for purchase in purchases:
-        if purchase['user_id']==customer_id:
-            print(purchase['products'])
+        if purchase['user_id'] == user_id:
+            purchaselist.append(purchase)
+    if not purchaselist:
+        print(f"No purchase with id: {user_id}")
+    return purchaselist
 
+#reusable function to get purchase by purchase id 
+def get_purchase_by_purchase_id():
+    pprint(get_all_purchases())
+    purchaseid=input("enter purchase-id: ")
+    for purchase in purchases:
+        if purchase['purchased_id']==purchaseid:
+            return purchase
 
-
+#function to search purchase buy customer id or purchase id
+def search_purchase():
+    print("How do you want to search")
+    selection=int(input("Enter 1 to search by product_id or 2 to search by customer_id: "))
+    if selection==1:
+        yourproductid=int(input("Enter the purchasee id to view purchase: "))
+        purchase=get_purchase_by_purchase_id(product_id=yourproductid)
+        if not purchase:
+            return
+    elif selection==2:
+        yourcustomerid=int(input("Enter customer id to view purchase: "))
+        purchasecust=pprint(get_purchases_by_cust_id(user_id=yourcustomerid))
+        if not purchasecust:
+             return
 
 def purchase_menu():
-    print("what would you like to do?")
-    print("1:Make purchase")
-    print("2:List all purchases")
-    print("3:Get specific purchase")
-    print("4:Get customer info")
+    print("\t***Purchase Menu***")
+    print("\t1:Make purchase")
+    print("\t2:List all purchases")
+    print("\t3:Get specific purchase")
+    print("\t4:Back to main menu")
 
-    selection = int(input("enter your choice: "))
-    if selection == 1:
-        make_purchase()
-    elif selection == 2:
-        get_all_purchases()
-    elif selection == 4:
-        get_customer_info()
-    
-   # elif selection == 4:
-        #get_customer_info()
+    try:
+        selection = int(input("enter your choice: "))
+        if selection == 1:
+            make_purchase()
+            purchase_menu()
+        elif selection == 2:
+            get_all_purchases()
+            purchase_menu()
+        elif selection == 3:
+            search_purchase()
+            purchase_menu()
+        elif selection==4:
+            from main import menu
+            menu()
+    except:
+        print("\tInvalid input!! ")
+  
+
+
+
+
