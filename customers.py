@@ -47,6 +47,7 @@ def get_single_customer(user_id):
 
 # save customer function called after inputing customer details
 
+
 def save_customer_to_file(data):
 
     new_customer = {}
@@ -65,6 +66,7 @@ def save_customer_to_file(data):
         json.dump(customers, file_out, indent=0)
 
 # adding a customer to db
+
 
 def add_customer():
 
@@ -88,27 +90,35 @@ def add_customer():
 
 # updating customer details
 
+
 def update_customer():
-    get_all_customers()
+    pprint(get_all_customers())
     # calling the above function to be able to see the ids
-    yourid = input("enter id: ")
+    yourid = int(input("enter id: "))
     for cust in customers:
         # breakpoint()
 
         if cust['user_id'] == yourid:
 
-            newnumber = int(input("Enter new number: "))
-
-            newaddress = str(input("Enter new address: "))
-            cust['phonenumber'] = newnumber
-            cust['address'] = newaddress
+            selection = int(
+                input("enter 1 to change number or 2 to change address: "))
             # breakpoint()
+            if selection == 1:
+                newnumber = int(input("Enter new number: "))
+                cust['phonenumber'] = newnumber
+
+            elif selection == 2:
+
+                newaddress = str(input("Enter new address: "))
+                cust['address'] = newaddress
+    # breakpoint()
 
     with open('customers.json', 'w') as file_out:
         json.dump(customers, file_out, indent=0)
         print("Customer updated successfully")
 
 # deleting a customer
+
 
 def delete_customer():
     get_all_customers()
@@ -121,7 +131,7 @@ def delete_customer():
             if customers[i]['user_id'] == yourid:
                 customers.remove(customers[i])
             break
-    
+
         with open('customers.json', 'w') as file_out:
             json.dump(customers, file_out, indent=2)
             print("Customer deleted successfully")
@@ -138,12 +148,12 @@ def customers_in_db():
     print(f"Total number of customers is: {(len(customers))}")
 
 
-#function to get customer info(name, products bought and amount spent)
+# function to get customer info(name, products bought and amount spent)
 def get_customer_info():
     from purchases import get_purchases_by_cust_id
     from products import get_single_product
 
-    cust_id=int(input("Enter customer id to view details: "))
+    cust_id = int(input("Enter customer id to view details: "))
 
     customer = get_single_customer(user_id=cust_id)
     if not customer:
@@ -168,7 +178,7 @@ def get_customer_info():
     print(f"Name ----- Quantity\n")
     for key, value in products_bought.items():
         print(f"{key}     {value}")
-        
+
 
 # the submenu to navigate customer operations
 
@@ -180,8 +190,8 @@ def customer_menu():
     print("3:Delete customer")
     print("4:List all customers")
     print("5:Get customer information")
+    print("6:Back to main menu")
 
-    
     try:
 
         selection = int(input("enter your choice: "))
@@ -206,7 +216,7 @@ def customer_menu():
 
         else:
             print("\n\tInvalid selection! Please try again.\t\t")
+            from main import menu
+            menu()
     except:
         print("\n\tInvalid input! Please enter a valid value.\t\t")
-
-
